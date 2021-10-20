@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars');
 
-
+const Todo = require('./models/todo')
 const app = express()
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
@@ -26,7 +26,11 @@ db.once('open', () => {
 app.get('/', (req, res) => {
   // res.send('hello world')
 
-  res.render('index')
+  Todo.find()
+    .lean()
+    .then(todos => res.render('index', { todos }))
+    .catch(error => console.log('error'))
+
 
 })
 
