@@ -1,8 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars');
+
 
 const app = express()
 
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 // connect to the mongoDB
 mongoose.connect('mongodb://localhost/todo-list', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,7 +24,10 @@ db.once('open', () => {
 
 // setting up homepage route
 app.get('/', (req, res) => {
-  res.send('hello world')
+  // res.send('hello world')
+
+  res.render('index')
+
 })
 
 
