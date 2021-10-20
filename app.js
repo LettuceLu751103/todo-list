@@ -48,6 +48,17 @@ app.post('/todos', (req, res) => {
     .then(() => res.redirect('/')) // 新增完成後導回首頁
     .catch(error => console.log(error))
 })
+
+
+app.get('/todos/:id', (req, res) => {
+  const id = req.params.id
+  return Todo.findById(id)
+    .lean()
+    .then((todo) => res.render('detail', { todo }))
+    .catch(error => console.log(error))
+})
+
+
 // setting up port 3000 for service
 app.listen('3000', () => {
   console.log('App is running on http://localhost:3000')
