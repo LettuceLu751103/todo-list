@@ -5,7 +5,7 @@ const app = express()
 
 
 // connect to the mongoDB
-mongoose.connect('mongodb://localhost/todo-list')
+mongoose.connect('mongodb://localhost/todo-list', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
 
