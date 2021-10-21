@@ -4,7 +4,8 @@ const exphbs = require('express-handlebars');
 // 引用 body-parser
 const bodyParser = require('body-parser')
 
-const Todo = require('./models/todo')
+const Todo = require('./models/todo');
+const todo = require('./models/todo');
 const app = express()
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
@@ -88,7 +89,21 @@ app.post('/todos/:id/edit', (req, res) => {
 
 })
 
+app.post('/todos/:id/delete', (req, res) => {
+  const id = req.params.id
 
+  // 查詢該筆資料
+  return Todo.findById(id)
+    .then(todo => {
+      todo.remove()
+    })
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(error => {
+      console.log(error)
+    })
+})
 
 
 // setting up port 3000 for service
