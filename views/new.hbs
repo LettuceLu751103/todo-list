@@ -1,4 +1,10 @@
-<form action="/todos" method="POST">
-  <input type="text" placeholder="name" name="name">
-  <button type="submit">Create</button>
+<form action="/todos" method="POST" style="display: inline;">
+  <div class="input-group mb-3 mt-5">
+
+    <input type="text" class="form-control" placeholder="name" name="name" aria-label="Text input with checkbox">
+    <div class="input-group-append">
+      <button type="submit" class="btn btn-success">Create</button>
+    </div>
+  </div>
+
 </form>
