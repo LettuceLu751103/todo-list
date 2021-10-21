@@ -1,14 +1,21 @@
-<ul>
+<ul class="list-group">
   {{#each todos}}
 
-  <li>
-    <input type="checkbox" name="isDone" {{#if this.isDone}} checked {{/if}}>
-    {{this.name}}
-    <a href="./todos/{{ this._id }}">detail</a>
-    <a href="./todos/{{ this._id }}/edit">edit</a><!-- 加入這行 -->
-    <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-      <button type="submit">delete</button>
-    </form>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-auto mr-auto">
+        <input type="checkbox" name="isDone" {{#if this.isDone}} checked {{/if}}>
+        {{this.name}}
+      </div>
+
+      <div class="col-auto">
+        <a href="./todos/{{ this._id }}" class="btn btn-secondary">detail</a>
+        <a href="./todos/{{ this._id }}/edit" class="btn btn-success">edit</a><!-- 加入這行 -->
+        <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+          <button type="submit" class="btn btn-danger">delete</button>
+        </form>
+      </div>
+    </div>
   </li>
   {{/each}}
 </ul>
