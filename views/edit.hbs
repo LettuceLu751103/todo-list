@@ -1,5 +1,17 @@
-<form action="/todos/{{todo._id}}?_method=PUT" method="POST">
-  <input type="checkbox" name="isDone" {{#if todo.isDone}} checked {{/if}}>
-  <input type="text" placeholder="name" name="name" value="{{todo.name}}">
-  <button type="submit">Update</button>
+<form action="/todos/{{todo._id}}?_method=PUT" method="POST" style="display: inline;">
+  <div class="input-group mb-3 mt-5">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <input type="checkbox" name="isDone" {{#if todo.isDone}} checked {{/if}}
+          aria-label="Checkbox for following text input">
+      </div>
+    </div>
+    <input type="text" class="form-control" placeholder="name" name="name" value="{{ todo.name }}"
+      aria-label="Text input with checkbox">
+
+    <div class="input-group-append">
+      <button type="submit" class="btn btn-success">Update</button>
+    </div>
+  </div>
+
 </form>
