@@ -9,8 +9,7 @@ const bodyParser = require('body-parser')
 // 載入 method-override
 const methodOverride = require('method-override')
 
-// 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
-usePassport(app)
+
 
 const routes = require('./routes')
 
@@ -32,6 +31,11 @@ app.use(session({
 
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
+
+
+// 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
+usePassport(app)
+
 app.use(routes)
 // connect to the mongoDB
 require('./config/mongoose')
