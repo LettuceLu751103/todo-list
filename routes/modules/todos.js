@@ -10,23 +10,26 @@ router.get('/new', (req, res) => {
 
 router.post('/', (req, res) => {
   const name = req.body.name       // 從 req.body 拿出表單裡的 name 資料
-  return Todo.create({ name })     // 存入資料庫
+  const userId = req.user._id
+  return Todo.create({ name, userId })     // 存入資料庫
     .then(() => res.redirect('/')) // 新增完成後導回首頁
     .catch(error => console.log(error))
 })
 
 
 router.get('/:id', (req, res) => {
-  const id = req.params.id
-  return Todo.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Todo.findOne({ _id, userId })
     .lean()
     .then((todo) => res.render('detail', { todo }))
     .catch(error => console.log(error))
 })
 
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  return Todo.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Todo.findOne({ _id, userId })
     .lean()
     .then((todo) => {
       res.render('edit', { todo })
@@ -39,9 +42,10 @@ router.get('/:id/edit', (req, res) => {
 
 // 更新功能
 router.put('/:id', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
   const { name, isDone } = req.body
-  return Todo.findById(id)
+  return Todo.findOne({ _id, userId })
     .then(todo => {
       todo.name = name
       todo.isDone = isDone === 'on'
@@ -58,10 +62,11 @@ router.put('/:id', (req, res) => {
 
 // 刪除功能
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
 
   // 查詢該筆資料
-  return Todo.findById(id)
+  return Todo.findOne({ _id, userId })
     .then(todo => {
       todo.remove()
     })
