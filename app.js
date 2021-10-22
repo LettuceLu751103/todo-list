@@ -1,10 +1,16 @@
 const express = require('express')
 const session = require('express-session')
+// 載入設定檔，要寫在 express-session 以後
+const usePassport = require('./config/passport')
+
 const exphbs = require('express-handlebars');
 // 引用 body-parser
 const bodyParser = require('body-parser')
 // 載入 method-override
 const methodOverride = require('method-override')
+
+// 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
+usePassport(app)
 
 const routes = require('./routes')
 
