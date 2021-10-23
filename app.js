@@ -9,7 +9,9 @@ const bodyParser = require('body-parser')
 // 載入 method-override
 const methodOverride = require('method-override')
 const flash = require('connect-flash')   // 引用套件
-
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const routes = require('./routes')
 
@@ -23,7 +25,7 @@ app.set('view engine', 'hbs')
 
 // setting up session middleware
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
@@ -56,6 +58,6 @@ require('./config/mongoose')
 
 
 // setting up port 3000 for service
-app.listen('3000', () => {
+app.listen(process.env.PORT, () => {
   console.log('App is running on http://localhost:3000')
 })
