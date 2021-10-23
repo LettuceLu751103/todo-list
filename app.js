@@ -9,10 +9,12 @@ const bodyParser = require('body-parser')
 // 載入 method-override
 const methodOverride = require('method-override')
 const flash = require('connect-flash')   // 引用套件
+
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
+console.log(process.env)
 const routes = require('./routes')
 
 const app = express()
