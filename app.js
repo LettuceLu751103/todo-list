@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 // 載入 method-override
 const methodOverride = require('method-override')
 const flash = require('connect-flash')   // 引用套件
-
+const PORT = process.env.PORT || 3000
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -60,6 +60,6 @@ require('./config/mongoose')
 
 
 // setting up port 3000 for service
-app.listen(process.env.PORT, () => {
-  console.log('App is running on http://localhost:3000')
+app.listen(PORT, () => {
+  console.log(`App is running on http://localhost:${PORT}`)
 })
